@@ -9,6 +9,53 @@ the numbers 1,2,...,9 (in this order) such that the result is 100. For example 1
 + 6 + 78 + 9 = 100.
 """
 
+"""Qualitative questions."""
+
+"""
+
+1. What are your goals for the next five years?
+
+I am currently very focused on getting my first software engineering job, 
+and my hope is that after I get that job I will be able to move 
+vertically within that orginization. I would like to be something
+like a Senior Lead Software Engineer five years from now. 
+
+
+2. What is your reason for leaving your previous position, 
+or why do you want to leave your
+current position (if applicable)? 
+What do you hope to get out of this position?
+
+The first part of the question is not applicable. 
+I hope to gain quality experience and growth as a software engineer. 
+I'm seeking a position that will facilitate learning and career growth. 
+
+
+3. Can you share your biggest professional or academic accomplishment? Can you share
+your biggest professional or academic failure?
+
+My biggest academic accomplishmet is graduating Cum Laude with a
+mechanical engineering degree. This is not an easy thing to do, and I'm 
+very proud of the hard work and dedication that accomplishment highlights. 
+My biggest professional failure is probably not recieving a job offer 
+from the startup Rover. They are currently only hiring senior engineers 
+but they decided to give me a chance at the interview process after I 
+passed a coding test for them. I then passed an hour long live coding 
+phone screen and was assigned a take home coding project. I spent around 
+30 hours on the project and ended up not moving forward in the interview 
+process. This was fairly discouraging for me, but on the bright side I 
+learned a great deal while building out the project and became a 
+better software engineer in the process. 
+
+4. What would your peers say are your strengths and weaknesses?
+
+My peers would say my strengths include my work ethic, drive, 
+ability to get along with people, and technical aptitude. My weeknesses 
+include organization and first impressions. 
+
+"""
+
+
 
 """1. Check if a bst is balanced at every node."""
 
