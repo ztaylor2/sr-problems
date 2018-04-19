@@ -56,7 +56,6 @@ include organization and first impressions.
 """
 
 
-
 """1. Check if a bst is balanced at every node."""
 
 
@@ -204,3 +203,144 @@ class LinkedList(object):
             kth_to_last_list.append(current_node.data)
             current_node = current_node.next
         return kth_to_last_list
+
+
+"""3. Write a program that outputs all possibilities to put the operators ‘+’, ‘-’, or nothing between
+the numbers 1,2,...,9 (in this order) such that the result is 100. For example 1 + 2 + 3 - 4 + 5
++ 6 + 78 + 9 = 100."""
+
+
+digits = [1,2,3,4,5,6,7,8,9]
+searchSum = 100
+paths = []
+
+
+def find_paths(curr_sum, previous_number, index):
+    previous_digit = abs(previousNumber % 10)
+
+    # if we are done with the digits
+    if index >= len(digits):
+        if curr_sum == 100:
+            paths.append()
+
+    current_digit = digits[index];
+    concatinated_number = int(str(previous_digit) + str(current_digit));
+
+    plus_paths = find_paths(curr_sum-previousNumber, current_digit, index+1);
+    minus_paths = find_paths(curr_sum-previousNumber, -current_digit, index+1);
+    concat_paths = find_paths(curr_sum, concatinated_number, index+1);
+
+
+# function concatPrefix(prefix, paths) {
+#     return paths
+#         .filter(function(p) { return p.length > 0; })
+#         .map(function(p) { return prefix.concat(p); });
+# }
+ 
+# function findPaths(sum, previousNumber, index) {
+#     var previousDigit = Math.abs(previousNumber%10);
+#     if (index >= digits.length) {
+#         return sum == previousNumber ? [[previousDigit]] : [];
+#     }
+     
+#     var currentDigit = digits[index];
+#     var concatenatedNumber = previousNumber >= 0 ? 10*previousNumber + currentDigit : 10*previousNumber - currentDigit;
+  
+#     var plusPaths = findPaths(sum-previousNumber, currentDigit, index+1);
+#     var minusPaths = findPaths(sum-previousNumber, -currentDigit, index+1);
+#     var concatPaths = findPaths(sum, concatenatedNumber, index+1);
+     
+#     var paths = [];
+#     Array.prototype.push.apply(paths, concatPrefix([previousDigit, '+'], plusPaths));
+#     Array.prototype.push.apply(paths, concatPrefix([previousDigit, '-'], minusPaths));
+#     Array.prototype.push.apply(paths, concatPrefix([previousDigit, '&'], concatPaths));
+#     return paths;
+# }
+ 
+# var foundPaths = findPaths(searchSum, digits[0], 1);
+ 
+# if (foundPaths.length == 0) {
+#     console.log("no paths were found");
+# } else {
+#     for (var i = 0; i < foundPaths.length; i++) {
+#         console.log(foundPaths[i].join("").replace(/&/g, ""));
+#     }
+# }
+
+def get_ones_zeros(size):
+    """
+    >>> get_ones_zeros(0)
+    [[]]
+    >>> get_ones_zeros(1)
+    [[0], [1]]
+    >>> get_ones_zeros(2)
+    [[0, 0], [0, 1], [1, 0], [1, 1]]
+    >>> get_ones_zeros(3)
+    [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
+    """
+    if size == 0: return [[]]
+    else:
+        res = get_ones_zeros(size - 1)
+        return cons(0, res) + cons(1, res)
+
+
+def glue(values, glues):
+    """
+    >>> glue([1,2,3,4,5,6,7,8,9], [0,0,0,0,0,0,0,0,0])
+    [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    >>> glue([1,2,3,4,5,6,7,8,9], [1,0,0,0,0,0,0,0,0])
+    [12, 3, 4, 5, 6, 7, 8, 9]
+    >>> glue([1,2,3,4,5,6,7,8,9], [0,1,0,0,0,0,0,0,0])
+    [1, 23, 4, 5, 6, 7, 8, 9]
+    >>> glue([1,2,3,4,5,6,7,8,9], [0,1,1,1,1,1,1,1,1])
+    [1, 23456789]
+    """
+    
+    index_j = 0
+    index_i = 0
+    size = len(values)
+    
+    result = []
+    value_stack = values[0]
+    
+    while index_i < size:
+        
+        # the case over the boundary
+        if index_i + 1 >= size:
+            result.append(value_stack)
+            break
+        
+        new_value = values[index_i + 1]
+        # normal case
+        if glues[index_j] == 0:
+            result.append(value_stack)
+            value_stack = new_value
+        else:
+            value_stack = value_stack * 10 + new_value
+                
+        index_i += 1
+        index_j += 1
+
+    return result
+
+
+def get_numbers(stop = 9):
+    """returns all the possible numbers combined from 1 to 9."""
+    values = range(1, stop+1)
+    one_zeros = get_ones_zeros(stop)
+    result = []
+    for one_zero in one_zeros:
+        res = glue(values, one_zero)
+        # list cannot be a member of a set, so the result should be turn into a tuple
+        result.append(tuple(res))
+    return set(result)
+    
+def solution(stop = 9, goal = 100):
+    """."""
+    numbers = get_numbers(stop)
+    for number in numbers:
+        variations = map(lambda y: [number[0]] + y, random_values(number[1:]))
+        for v in variations:
+            summed_value = sum(v)
+            if goal == summed_value:
+                print(v)
